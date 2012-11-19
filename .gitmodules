@@ -1,0 +1,3 @@
+[submodule "subdivision_shader/glm"]
+	path = subdivision_shader/glm
+	url = git://github.com/g-truc/glm.git
