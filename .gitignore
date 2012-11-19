@@ -1,0 +1,9 @@
+*.swp
+Release/
+subdivision_shader/Debug
+subdivision_shader/Release
+cs284_subdivision_shader.sdf
+cs284_subdivision_shader.suo
+cs284_subdivision_shader.opensdf
+subdivision_shader.v11.suo
+cs284_subdivision_shader.v11.suo

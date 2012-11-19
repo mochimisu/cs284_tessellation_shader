@@ -27,6 +27,9 @@ private:
 
 	unsigned int vao_id[1]; // Our Vertex Array Object
 	unsigned int vbo_id[1]; // Our Vertex Buffer Object
+
+	float tess_level_inner;
+	float tess_level_outer;
 };
 
 #endif

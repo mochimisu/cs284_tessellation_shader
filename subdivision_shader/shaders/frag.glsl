@@ -1,10 +1,7 @@
-#version 150 core
-
-in vec3 pass_Color;
-
-out vec4 out_Color;
-
-void main(void)
-{
-      out_Color = vec4(pass_Color, 1.0);
+#version 400
+ 
+ out vec4 fragcolor;
+ 
+void main () {
+  fragcolor = vec4 (1, 1, 1, 1);
 }

@@ -16,11 +16,17 @@ void GLEngine::setupScene(void)
 	shader = new Shader();
 	shader->initShader(GL_VERTEX_SHADER, "shaders/vert.glsl");
 	shader->initShader(GL_FRAGMENT_SHADER, "shaders/frag.glsl");
+	shader->initShader(GL_TESS_CONTROL_SHADER, "shaders/tess.control.glsl");
+	shader->initShader(GL_TESS_EVALUATION_SHADER, "shaders/tess.eval.glsl");
 	shader->initProgram();
 
 	projection_matrix = glm::perspective(60.0f, (float)window_width / (float)window_height, 0.1f, 100.f);  // Create our perspective matrix
 
 	createSquare(); // Create our square
+
+	tess_level_inner = 1;
+	tess_level_outer = 1;
+
 }
 
 
@@ -32,12 +38,23 @@ void GLEngine::reshape(int w, int h)
 
 void GLEngine::keyboard(unsigned char key, int x, int y)
 {
+	int tess_delta = 1;
 	switch(key) 
 	{
 	  case 27:
 		  exit(0);
 		  break;
+	  case 'q':
+		  tess_delta = -1;
+	  case 'w':
+		  if ((tess_level_inner + tess_delta) > 0) {
+			tess_level_inner += tess_delta;
+		  }
+		  if ((tess_level_outer + tess_delta) > 0) {
+			tess_level_outer += tess_delta;
+		  }
 	}
+	glutPostRedisplay();
 }
 
 
@@ -46,21 +63,27 @@ void GLEngine::display(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); // Clear required buffers
 
 	view_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -5.f)); // Create our view matrix
-	model_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));  // Create our model matrix
+	model_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(2.f));  // Create our model matrix
 
 	shader->bind(); // Bind our shader
 
 	int projectionMatrixLocation = glGetUniformLocation(shader->id(), "projectionMatrix"); // Get the location of our projection matrix in the shader
 	int viewMatrixLocation = glGetUniformLocation(shader->id(), "viewMatrix"); // Get the location of our view matrix in the shader
 	int modelMatrixLocation = glGetUniformLocation(shader->id(), "modelMatrix"); // Get the location of our model matrix in the shader
+	int tli_loc = glGetUniformLocation(shader->id(), "tessLevelInner");
+	int tlo_loc = glGetUniformLocation(shader->id(), "tessLevelOuter");
 
 	glUniformMatrix4fv(projectionMatrixLocation, 1, GL_FALSE, &projection_matrix[0][0]); // Send our projection matrix to the shader
 	glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &view_matrix[0][0]); // Send our view matrix to the shader
 	glUniformMatrix4fv(modelMatrixLocation, 1, GL_FALSE, &model_matrix[0][0]); // Send our model matrix to the shader
+	glUniform1f(tli_loc, tess_level_inner);
+	glUniform1f(tlo_loc, tess_level_outer);
 
 	glBindVertexArray(vao_id[0]); // Bind our Vertex Array Object
 
-	glDrawArrays(GL_TRIANGLES, 0, 6); // Draw our square
+	glPatchParameteri(GL_PATCH_VERTICES, 3);
+	glDrawArrays(GL_PATCHES, 0, 3); // Draw our triangle
+	//glDrawArrays(GL_PATCHES, 0, 6); // Draw our square
 
 	glBindVertexArray(0); // Unbind our Vertex Array Object
 
@@ -97,3 +120,4 @@ void GLEngine::createSquare(void)
 
 	delete [] vertices; // Delete our vertices from memory
 }
+

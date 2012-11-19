@@ -36,4 +36,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\frag.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\vert.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\tess.control.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\tess.eval.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
