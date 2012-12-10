@@ -84,8 +84,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="glengine.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="objloader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="objloader.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="glengine.h" />
     <ClInclude Include="shader.h" />

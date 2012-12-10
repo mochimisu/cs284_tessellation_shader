@@ -52,6 +52,8 @@ static void validateProgram(GLuint program) {
 
 
 Shader::Shader() {
+	attribute_v_coord = -1;
+	attribute_v_normal = -1;
 }
 
 void Shader::initShader(unsigned int type, const char * file) {
@@ -77,6 +79,23 @@ void Shader::initProgram()
 
 	glLinkProgram(shader_id);
 	validateProgram(shader_id);
+
+
+	const char* attribute_name;
+
+	attribute_name = "vp_loc";
+	attribute_v_coord = glGetAttribLocation(shader_id, attribute_name);
+	if (attribute_v_coord == - 1)
+	{
+		cerr << "Could not bind attribute " << attribute_name;
+	};
+
+	attribute_name = "vp_norm";
+	attribute_v_normal = glGetAttribLocation(shader_id, attribute_name);
+	if (attribute_v_normal == - 1)
+	{
+	cerr << "Could not bind attribute " << attribute_name;
+	}
 }
 
 Shader::~Shader() {

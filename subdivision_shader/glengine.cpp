@@ -2,10 +2,15 @@
 
 GLEngine::GLEngine(void)
 {
+	inited = false;
 }
 
 GLEngine::~GLEngine(void)
 {
+	if (inited)
+	{
+		delete(shader);
+	}
 }
 
 void GLEngine::setupScene(void)
@@ -26,6 +31,9 @@ void GLEngine::setupScene(void)
 
 	tess_level_inner = 1;
 	tess_level_outer = 1;
+	inited = true;
+	
+	obj.loadObj("dragon.obj");
 
 }
 
@@ -63,7 +71,7 @@ void GLEngine::display(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); // Clear required buffers
 
 	view_matrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -5.f)); // Create our view matrix
-	model_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(2.f));  // Create our model matrix
+	model_matrix = glm::scale(glm::mat4(1.0f), glm::vec3(0.25f));  // Create our model matrix
 
 	shader->bind(); // Bind our shader
 
@@ -79,14 +87,12 @@ void GLEngine::display(void)
 	glUniform1f(tli_loc, tess_level_inner);
 	glUniform1f(tlo_loc, tess_level_outer);
 
-	glBindVertexArray(vao_id[0]); // Bind our Vertex Array Object
 
 	glPatchParameteri(GL_PATCH_VERTICES, 3);
-	glDrawArrays(GL_PATCHES, 0, 3); // Draw our triangle
-	//glDrawArrays(GL_PATCHES, 0, 6); // Draw our square
 
-	glBindVertexArray(0); // Unbind our Vertex Array Object
-
+	obj.upload();
+	obj.draw(shader);
+	
 	shader->unbind(); // Unbind our shader
 
 	glutSwapBuffers(); // Swap buffers so we can see our rendering

@@ -9,7 +9,8 @@ void keyboard(unsigned char key, int x, int y) {
 
 void display() {
 	engine.display();
-}
+}
+
 void reshape(int w, int h) {
 	engine.reshape(w,h);
 }
@@ -17,8 +18,8 @@ void reshape(int w, int h) {
 
 int main(int argc, char** argv)
 {
-	const unsigned int width = 500;
-	const unsigned int height = 500;
+	const unsigned int width = 1680;
+	const unsigned int height = 1024;
 
 	glutInit(&argc, argv);
 

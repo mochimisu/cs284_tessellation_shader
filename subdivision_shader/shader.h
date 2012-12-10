@@ -16,6 +16,9 @@ public:
     void unbind(); // Unbind our GLSL shader program
     
     unsigned int id(); // Get the identifier for our program
+
+	GLint attribute_v_coord;
+	GLint attribute_v_normal;
     
 private:
 	std::vector<unsigned int> shaders; // Vector of shaders added

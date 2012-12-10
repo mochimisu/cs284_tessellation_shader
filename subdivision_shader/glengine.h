@@ -1,5 +1,6 @@
 #include "main.h"
 #include "shader.h"
+#include "objloader.h"
 
 #ifndef __GLENGINE_H_
 #define __GLENGINE_H_
@@ -20,6 +21,7 @@ private:
 	int window_height; // Store the height of our window
 
 	Shader *shader; // Our GLSL shader
+	ObjLoader obj;
 
 	glm::mat4 projection_matrix; // Store the projection matrix
 	glm::mat4 view_matrix; // Store the view matrix
@@ -30,6 +32,8 @@ private:
 
 	float tess_level_inner;
 	float tess_level_outer;
+
+	bool inited;
 };
 
 #endif
