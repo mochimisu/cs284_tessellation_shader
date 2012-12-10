@@ -37,7 +37,7 @@ void GLEngine::setupScene(void)
 	tess_level_outer = 1;
 	inited = true;
 	
-	obj.loadObj("dragon.obj");
+	obj.loadObj("data/cube.obj");
 	
 	glEnable(GL_DEPTH_TEST);
 
