@@ -4,8 +4,9 @@ layout (triangles, equal_spacing, ccw) in; // triangles, quads, or isolines
 in vec3 evaluationpoint_wor[];
 in vec3 evaluationpoint_norm[];
 
-out vec3 frag_pos;
-out vec3 frag_norm;
+out vec3 te_position;
+out vec3 te_patch_distance;
+out vec3 te_norm;
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
@@ -26,9 +27,10 @@ void main () {
   vec3 norm = n0 + n1 + n2;
 
   vec4 _norm = normalMatrix * vec4(norm,1);
-  frag_norm = _norm.xyz;
-  frag_norm = norm;
+  te_norm = _norm.xyz;
   vec4 _pos = viewMatrix * modelMatrix * vec4(pos,1);
-  frag_pos = _pos.xyz/_pos.w;
+  te_patch_distance = gl_TessCoord;
+  te_position = _pos.xyz/_pos.w;
+
   gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4 (pos, 1);
 }

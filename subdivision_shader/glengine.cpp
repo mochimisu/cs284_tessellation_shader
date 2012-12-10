@@ -25,9 +25,10 @@ void GLEngine::setupScene(void)
 
 	shader = new Shader();
 	shader->initShader(GL_VERTEX_SHADER, "shaders/vert.glsl");
-	shader->initShader(GL_FRAGMENT_SHADER, "shaders/frag.glsl");
 	shader->initShader(GL_TESS_CONTROL_SHADER, "shaders/tess.control.glsl");
 	shader->initShader(GL_TESS_EVALUATION_SHADER, "shaders/tess.eval.glsl");
+	shader->initShader(GL_GEOMETRY_SHADER, "shaders/geometry.glsl");
+	shader->initShader(GL_FRAGMENT_SHADER, "shaders/frag.glsl");
 	shader->initProgram();
 
 	projection_matrix = glm::perspective(60.0f, (float)window_width / (float)window_height, 0.1f, 100.f);  // Create our perspective matrix
