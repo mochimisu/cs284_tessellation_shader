@@ -3,23 +3,41 @@
 
 GLEngine engine;
 
-void keyboard(unsigned char key, int x, int y) {
+void keyboard(unsigned char key, int x, int y)
+{
 	engine.keyboard(key,x,y);
 }
 
-void display() {
+void display()
+{
 	engine.display();
 }
 
-void reshape(int w, int h) {
+void reshape(int w, int h)
+{
 	engine.reshape(w,h);
+}
+
+void mouseFunc(int button, int state, int x, int y)
+{
+	engine.mouseFunc(button, state, x, y);
+}
+
+void activeMotion(int x, int y)
+{
+	engine.activeMotion(x,y);
+}
+
+void passiveMotion(int x, int y)
+{
+	engine.passiveMotion(x,y);
 }
 
 
 int main(int argc, char** argv)
 {
-	const unsigned int width = 1680;
-	const unsigned int height = 1024;
+	const unsigned int width = 1280;
+	const unsigned int height = 800;
 
 	glutInit(&argc, argv);
 
@@ -38,7 +56,11 @@ int main(int argc, char** argv)
 
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
-	glutKeyboardFunc(keyboard);
+	glutKeyboardFunc(keyboard); 
+	glutMouseFunc(mouseFunc);
+	glutMotionFunc(activeMotion);
+	glutPassiveMotionFunc(passiveMotion);
+	glutIdleFunc(display);
 
 	glutMainLoop();
 	return 0;
