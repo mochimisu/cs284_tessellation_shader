@@ -64,5 +64,20 @@
     <None Include="shaders\phong_tessellation\pt.tess.control.glsl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="shaders\pn_triangles\pn.tess.eval.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\pn_triangles\pn.tess.control.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\phong_tessellation\pt.adaptive.tess.control.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\adaptive_phong_visualization\adaptive_vis.geometry.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\adaptive_phong_visualization\adaptive_vis.frag.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

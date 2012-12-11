@@ -11,20 +11,22 @@ layout (triangles, equal_spacing, ccw) in; // triangles, quads, or isolines
 in vec3 evaluationpoint_wor[];
 in vec3 evaluationpoint_norm[];
 in PhongPatch evaluationpoint_phongpatch[];
+in float evaluationpoint_d[];
 
 out vec3 te_position;
 out vec3 te_patch_distance;
 out vec3 te_norm;
+out float te_d;
 
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
 uniform mat4 normalMatrix;
+uniform float alpha;
  
 // gl_TessCoord is location within the patch (barycentric for triangles, UV for quads)
  
 void main () {
-
 
 	vec3 tess_coord_sq = gl_TessCoord * gl_TessCoord;
 
@@ -55,11 +57,17 @@ void main () {
 	vec3 n2 = gl_TessCoord.z * evaluationpoint_norm[2];
 	vec3 norm = n0 + n1 + n2;
 
+	phong_pos = alpha * phong_pos + (1.-alpha) * pos;
+
 	vec4 _norm = normalMatrix * vec4(norm,1);
 	te_norm = _norm.xyz;
-	vec4 _pos = viewMatrix * modelMatrix * vec4(pos,1);
+	vec4 _pos = viewMatrix * modelMatrix * vec4(phong_pos,1);
 	te_patch_distance = gl_TessCoord;
 	te_position = _pos.xyz/_pos.w;
+
+	te_d = gl_TessCoord.x * evaluationpoint_d[0]
+		+ gl_TessCoord.y * evaluationpoint_d[1] 
+		+ gl_TessCoord.z * evaluationpoint_d[2];
 
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4 (phong_pos, 1);
 }

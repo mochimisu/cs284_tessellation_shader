@@ -14,11 +14,11 @@ ObjLoader::~ObjLoader(void)
 
 void ObjLoader::loadObj(string filename)
 {
-	vector<glm::vec3> raw_normals;
 
-	vector<glm::vec3> raw_faces;
-	vector<glm::vec3> raw_faces_normals;
-	vector<glm::vec3> raw_faces_texture_coords;
+	obj_vertices.clear();
+	obj_normals.clear();
+	obj_texcoords.clear();
+	obj_elements.clear();
 
 	ifstream inpfile(filename.c_str());
 	if (!inpfile.is_open()) {
@@ -72,10 +72,8 @@ void ObjLoader::loadObj(string filename)
 			//cout << numSlash << endl;
 			if (num_slash == 0) {
 				sscanf(line.c_str(), "f %d %d %d", &v1, &v2, &v3);
-				raw_faces.push_back(glm::vec3(v1-1,v2-1,v3-1));
 			} else if (num_slash == 1) {
 				sscanf(line.c_str(), "f %d/%*d %d/%*d %d/%*d", &v1, &v2, &v3);
-				raw_faces.push_back(glm::vec3(v1-1,v2-1,v3-1));
 			} else if (num_slash == 2) {
 				if (double_slash)
 				{
@@ -145,7 +143,8 @@ void ObjLoader::upload()
 		glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
 		glBufferData(GL_ARRAY_BUFFER, obj_normals.size() * sizeof(obj_normals[0]),
 			obj_normals.data(), GL_STATIC_DRAW);
-	}
+	}
+
 	if (obj_elements.size() > 0)
 	{
 		glGenBuffers(1, &ibo_elements);;

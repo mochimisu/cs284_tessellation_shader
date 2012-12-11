@@ -14,11 +14,11 @@ in vec3 controlpoint_norm[];
 
 out vec3 evaluationpoint_wor[]; // to evaluation shader. will be used to guide positioning of generated points
 out vec3 evaluationpoint_norm[];
+out float evaluationpoint_d[];
 
 out PhongPatch evaluationpoint_phongpatch[];
  
-uniform float tessLevelInner; // controlled by keyboard buttons
-uniform float tessLevelOuter; // controlled by keyboard buttons
+uniform float tessLevel; 
  
 float PIi(int i, vec3 q)
 {
@@ -37,6 +37,7 @@ void main () {
 	evaluationpoint_norm[gl_InvocationID] = controlpoint_norm[gl_InvocationID];
 
 	// Calculate the tessellation levels
-	gl_TessLevelInner[0] = tessLevelInner;
-	gl_TessLevelOuter[gl_InvocationID] = tessLevelOuter; 
+	gl_TessLevelInner[0] = tessLevel;
+	gl_TessLevelOuter[gl_InvocationID] = tessLevel; 
+	evaluationpoint_d[gl_InvocationID] = tessLevel;
 }

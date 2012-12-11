@@ -1,6 +1,7 @@
 #include "main.h"
 #include "shader.h"
 #include "objloader.h"
+#include <vector>
 
 #ifndef __GLENGINE_H_
 #define __GLENGINE_H_
@@ -21,7 +22,9 @@ private:
 	int window_width; // Store the width of our window
 	int window_height; // Store the height of our window
 
+	std::vector<Shader *> shaders;
 	Shader *shader; // Our GLSL shader
+	std::vector<std::string> obj_filenames;
 	ObjLoader obj;
 
 	glm::mat4 projection_matrix; // Store the projection matrix
@@ -36,13 +39,16 @@ private:
 	unsigned int vao_id[1]; // Our Vertex Array Object
 	unsigned int vbo_id[1]; // Our Vertex Buffer Object
 
-	float tess_level_inner;
-	float tess_level_outer;
+	float tess_level;
 
 	bool inited;
 	int mouse_state;
 	float scene_scale;
 	glm::vec3 scene_translate;
+
+	unsigned int cur_shader;
+	unsigned int cur_obj;
+	float alpha;
 };
 
 #endif

@@ -50,10 +50,10 @@ static void validateProgram(GLuint program) {
 		cout << "Error validating shader " << program << endl; // Output which program had the error
 }
 
-
-Shader::Shader() {
+Shader::Shader(string shader_name) {
 	attribute_v_coord = -1;
 	attribute_v_normal = -1;
+	name = shader_name;
 }
 
 void Shader::initShader(unsigned int type, const char * file) {

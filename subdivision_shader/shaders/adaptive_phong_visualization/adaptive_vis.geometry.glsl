@@ -8,14 +8,17 @@ layout(triangle_strip, max_vertices = 3) out;
 in vec3 te_position[3];
 in vec3 te_patch_distance[3];
 in vec3 te_norm[3];
+in float te_d[3];
 
 out vec3 g_normal;
 out vec3 g_patch_distance;
 out vec3 g_tri_distance;
 out vec4 g_position;
+out float g_d;
 
 void main()
 {
+	g_d = te_d[0];
     g_patch_distance = te_patch_distance[0];
 	g_normal = te_norm[0];
     g_tri_distance = vec3(1, 0, 0);
@@ -23,6 +26,7 @@ void main()
 	gl_Position = g_position; 
     EmitVertex();
 
+	g_d = te_d[1];
     g_patch_distance = te_patch_distance[1];
 	g_normal = te_norm[1];
     g_tri_distance = vec3(0, 1, 0);
@@ -30,6 +34,7 @@ void main()
 	gl_Position = g_position; 
     EmitVertex();
 
+	g_d = te_d[2];
     g_patch_distance = te_patch_distance[2];
 	g_normal = te_norm[2];
     g_tri_distance = vec3(0, 0, 1);

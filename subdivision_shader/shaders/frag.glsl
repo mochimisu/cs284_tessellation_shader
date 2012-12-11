@@ -17,7 +17,7 @@ float amplify(float d, float scale, float offset)
 }
 void main () {
 	vec3 light_pos = vec3(0,0,5);
-	vec3 ambient = vec3(0.2);
+	vec3 ambient = vec3(0.6);
 
 	vec3 direction = normalize(light_pos-g_position.xyz);
 
@@ -26,9 +26,8 @@ void main () {
 	float d1 = min(min(g_tri_distance.x, g_tri_distance.y), g_tri_distance.z);
 	float d2 = min(min(g_patch_distance.x, g_patch_distance.y), g_patch_distance.z);
 
-	ndl = 1.;
 
-	vec3 color = amplify(d1, 40, -0.5) * amplify(d2, 60, -0.5) * vec3(ndl) + ambient;
+	vec3 color = amplify(d1, 40, -0.5) * amplify(d2, 60, -0.5) * (vec3(ndl) + ambient);
 
 	frag_color = vec4(color, 1.0);
 }

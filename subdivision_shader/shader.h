@@ -6,7 +6,7 @@
 
 class Shader {
 public:
-    Shader(); // Default constructor
+	Shader(std::string shader_name=""); // Default constructor
     ~Shader(); // Deconstructor for cleaning up
     
 	void initShader(unsigned int type, const char * file); // Add a shader
@@ -19,6 +19,8 @@ public:
 
 	GLint attribute_v_coord;
 	GLint attribute_v_normal;
+
+	std::string name;
     
 private:
 	std::vector<unsigned int> shaders; // Vector of shaders added

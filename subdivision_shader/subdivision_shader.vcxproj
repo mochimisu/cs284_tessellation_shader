@@ -93,10 +93,15 @@
     <ClInclude Include="shader.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\adaptive_phong_visualization\adaptive_vis.frag.glsl" />
+    <None Include="shaders\adaptive_phong_visualization\adaptive_vis.geometry.glsl" />
     <None Include="shaders\frag.glsl" />
     <None Include="shaders\geometry.glsl" />
+    <None Include="shaders\phong_tessellation\pt.adaptive.tess.control.glsl" />
     <None Include="shaders\phong_tessellation\pt.tess.control.glsl" />
     <None Include="shaders\phong_tessellation\pt.tess.eval.glsl" />
+    <None Include="shaders\pn_triangles\pn.tess.control.glsl" />
+    <None Include="shaders\pn_triangles\pn.tess.eval.glsl" />
     <None Include="shaders\tess.control.glsl" />
     <None Include="shaders\tess.eval.glsl" />
     <None Include="shaders\vert.glsl" />
