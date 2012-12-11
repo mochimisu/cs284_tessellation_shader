@@ -58,5 +58,11 @@
     <None Include="shaders\geometry.glsl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="shaders\phong_tessellation\pt.tess.eval.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\phong_tessellation\pt.tess.control.glsl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

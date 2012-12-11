@@ -95,6 +95,8 @@
   <ItemGroup>
     <None Include="shaders\frag.glsl" />
     <None Include="shaders\geometry.glsl" />
+    <None Include="shaders\phong_tessellation\pt.tess.control.glsl" />
+    <None Include="shaders\phong_tessellation\pt.tess.eval.glsl" />
     <None Include="shaders\tess.control.glsl" />
     <None Include="shaders\tess.eval.glsl" />
     <None Include="shaders\vert.glsl" />
