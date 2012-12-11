@@ -72,11 +72,15 @@ void GLEngine::setupScene(void)
 	shaders.push_back(adapt_phong_tes_vis);
 	shader = shaders[cur_shader];
 
+	obj_filenames.push_back("data/bunny2.obj");
+	obj_filenames.push_back("data/bunny3.obj");
+	obj_filenames.push_back("data/bunny4.obj");
 	obj_filenames.push_back("data/cube.obj");
 	obj_filenames.push_back("data/dragon.obj");
-	obj_filenames.push_back("data/bunny.obj");
+	obj_filenames.push_back("data/teapot.obj");
 	obj_filenames.push_back("data/mug6.obj");
-	obj.loadObj("data/cube.obj");
+	obj.loadObj("data/bunny2.obj");
+	obj.upload();
 
 	projection_matrix = glm::perspective(60.0f, (float)window_width / (float)window_height, 0.1f, 100.f);  // Create our perspective matrix
 
@@ -95,6 +99,7 @@ void GLEngine::reshape(int w, int h)
 	window_width = w; // Set the window width
 	window_height = h; // Set the window height
 
+	projection_matrix = glm::perspective(60.0f, (float)window_width / (float)window_height, 0.1f, 100.f);  // Create our perspective matrix
 	glViewport(0,0,w,h);
 }
 
@@ -178,6 +183,7 @@ void GLEngine::keyboard(unsigned char key, int x, int y)
 	  case 'o':
 		  cur_obj = (cur_obj+delta)%obj_filenames.size();
 		  obj.loadObj(obj_filenames[cur_obj]);
+		  obj.upload();
 		  std::cout << obj_filenames[cur_obj].c_str() << std::endl;
 		  break;
 	  case 'Z':
@@ -223,7 +229,6 @@ void GLEngine::display(void)
 
 	glPatchParameteri(GL_PATCH_VERTICES, 3);
 
-	obj.upload();
 	obj.draw(cur_shader);
 	
 	cur_shader->unbind(); // Unbind our cur_shader
