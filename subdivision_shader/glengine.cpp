@@ -94,6 +94,8 @@ void GLEngine::reshape(int w, int h)
 {
 	window_width = w; // Set the window width
 	window_height = h; // Set the window height
+
+	glViewport(0,0,w,h);
 }
 
 void GLEngine::mouseFunc(int button, int state, int x, int y)
